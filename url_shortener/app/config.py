@@ -1,0 +1,1 @@
+DATABASE_URL = f"postgresql://localhost:12345@localhost:5432/url_shortener"
