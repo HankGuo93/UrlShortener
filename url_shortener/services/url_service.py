@@ -9,3 +9,7 @@ class URLService:
         short_url = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
         URLRepository.save_url_mapping(short_url, long_url)
         return f"http://localhost:5000/{short_url}"
+    
+    @staticmethod
+    def get_long_url(short_url: str) -> str:
+        return URLRepository.get_long_url(short_url)

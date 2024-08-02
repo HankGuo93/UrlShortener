@@ -14,3 +14,14 @@ class URLRepository:
         session.add(url_mapping)
         session.commit()
         session.close()
+
+    @staticmethod
+    def get_long_url(short_url: str) -> str:
+        engine = create_engine(DATABASE_URL)
+        session_maker_instance = sessionmaker(bind=engine)
+        session = session_maker_instance()
+
+        url_mapping = session.query(UrlMapping).filter_by(short_url=short_url).first()
+        session.close()
+
+        return url_mapping.long_url

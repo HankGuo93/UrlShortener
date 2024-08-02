@@ -1,7 +1,6 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, redirect, request
 
 from services.url_service import URLService
-
 
 url_bp = Blueprint('url_bp', __name__)
 
@@ -14,3 +13,11 @@ def shorten_url():
 
     short_url = URLService.shorten_url(long_url)
     return jsonify({'short_url': short_url}), 201
+
+@url_bp.route('/s/<short_url>', methods=['GET'])
+def redirect_to_long_url(short_url):
+    long_url = URLService.get_long_url(short_url)
+    if long_url:
+        return redirect(long_url)
+    else:
+        return jsonify({"error": "URL not found"}), 404
