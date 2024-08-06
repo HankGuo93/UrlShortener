@@ -6,19 +6,14 @@
     "configurations": [
         {
             "name": "Python 偵錯工具: Flask",
-            "type": "debugpy",
+            "type": "python",
             "request": "launch",
-            "module": "flask",
+            "program": "${workspaceFolder}/url_shortener/run.py",
             "env": {
-                "FLASK_APP": "url_shortener/app.py",
                 "FLASK_DEBUG": "1"
             },
-            "args": [
-                "run",
-                "--no-reload"
-            ],
-            "jinja": true,
-            "autoStartBrowser": false
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }
