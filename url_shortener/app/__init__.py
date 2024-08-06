@@ -1,5 +1,6 @@
 from flask import Flask
-from controllers.url_controller import url_bp
+from flask_restx import Api
+from controllers.url_controller import url_ns
 
 from infrastructure.db.extensions import db, migrate
 
@@ -11,6 +12,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    app.register_blueprint(url_bp)
+    api = Api(app, version='1.0', title='URL Shortener API', description='A simple URL shortener API', doc='/swagger')
+    api.add_namespace(url_ns, path='/api')
 
     return app
